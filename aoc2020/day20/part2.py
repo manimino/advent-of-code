@@ -28,6 +28,7 @@ USING = INPUT
 
 
 def img_from_strings(str_list):
+    # prints a numpy array of strings as a picture
     arrs = []
     sz = None
     for line in str_list:
