@@ -7,24 +7,25 @@ def read_input():
                 yield line.strip()
 
 
-def read_input_objs():
-    # for puzzles with newline-separated objects as input
-    with open('input.txt') as fh:
-        obj = []
-        for line in fh.readlines():
-            if not line.strip():
-                yield ' '.join(obj).strip()
-                obj = []
-            else:
-                obj.append(line.strip())
-        if obj:
-            yield obj
-            
 def main():
     for line in read_input():
-        pass
+        crabs = [int(x) for x in line.split(',')]
 
-    for line in read_input_objs():
-        pass
+    min_pos = min(crabs)
+    max_pos = max(crabs)
+    best = float('inf')
+    for p in range(min_pos, max_pos+1):
+        tot = 0
+        for c in crabs:
+            a = min(p, c)
+            b = max(p, c)+1
+            f = 0
+            for i in range(a, b):
+                f += i-a
+            #print(f)
+            tot += f
+        if tot < best:
+            best = tot
+    return best
 
-main()
+print(main())
